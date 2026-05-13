@@ -10,7 +10,7 @@ variable "Service_port" {
 
 variable "cidr_blocks" {
     type = list(string)
-    default = ["0.0.0.0/16"]
+    default = ["0.0.0.0/0"]
 
     validation {
       condition = length(var.cidr_blocks) > 0
