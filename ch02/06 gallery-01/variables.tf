@@ -1,6 +1,6 @@
 variable "Service_port" {
     type = number
-    default = 80
+    default = 8080
 
     validation {
       condition = 1 <= var.Service_port && var.Service_port <= 65535
@@ -19,7 +19,7 @@ variable "cidr_blocks" {
 }
 variable "instance_type" {
     type = string
-    default = "t3.micro"
+    default = "t3.small"
 
     validation {
       condition = contains(["t3.micro", "t3.small", "t3.medium"], var.instance_type)

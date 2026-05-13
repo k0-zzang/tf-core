@@ -1,5 +1,5 @@
 locals {
-    project = "tf-core-lab01"
+    project = "tf-core-gallery"
 
     vpc_id = data.aws_vpc.default.id
 
@@ -20,7 +20,7 @@ locals {
   iamrole = {
      name = "instance"
      
-     assume_role_policy = data.aws_iam_policy_document.ec2_assume_role
+     assume_role_policy = data.aws_iam_policy_document.ec2_assume_role.json
      policy_arn         = data.aws_iam_policy.aws_ssm_core_policy.arn
     }
 }

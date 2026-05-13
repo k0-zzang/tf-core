@@ -7,21 +7,6 @@ output "instance" {
     }
 }
 
-output "sg" {
-    value = {
-        id = aws_security_group.this.id
-        name = aws_security_group.this.name
-    }  
-}
-
-output "iamprofile" {
-    value = {
-        name = aws_iam_instance_profile.this.name
-    }
-}
-
-output "iamrole" {
-    value = {
-        arn = aws_iam_role.this.arn
-    }
+output "web_endpoint" {
+    value = "http://${aws_instance.this.public_ip}:${local.instance.allow_access.port}"
 }
