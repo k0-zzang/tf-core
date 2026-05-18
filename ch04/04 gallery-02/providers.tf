@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">=1.14.0"
+  required_version = ">= 1.14.0"
 
   required_providers {
     aws = {
@@ -10,11 +10,11 @@ terraform {
 
   backend "s3" {
     bucket       = "tf-core-tfsate"
-    key          = "gallery/terraform.tfstate"
+    key          = "gallery/terraform.tfsate"
     region       = "ap-northeast-2"
     encrypt      = true
     use_lockfile = true
-  }
+  }  
 }
 
 provider "aws" {

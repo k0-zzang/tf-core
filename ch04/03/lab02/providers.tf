@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">=1.14.0"
+  required_version = ">= 1.14.0"
 
   required_providers {
     aws = {
@@ -9,12 +9,11 @@ terraform {
   }
 
   backend "s3" {
-      # 자기한테 맞게 설정
-      bucket       = "tf-core-tfsate"
-      key          = "04.03/lab12/terraform.tfstate"
-      region       = "ap-northeast-2"
-      encrypt      = true
-      use_lockfile = true
+    bucket       = "tf-core-tfsate"
+    key          = "04.03/lab12/terraform.tfsate"
+    region       = "ap-northeast-2"
+    encrypt      = true
+    use_lockfile = true # false를 true로 변경하면 락거림
   }
 }
 

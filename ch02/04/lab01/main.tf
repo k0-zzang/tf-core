@@ -56,5 +56,4 @@ resource "aws_instance" "ssm_test" {
     tags = {
         Name = "${local.project}-instance-$(local.instance.name)"
     }
-
 }

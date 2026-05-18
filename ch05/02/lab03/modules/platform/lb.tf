@@ -3,7 +3,7 @@ resource "aws_lb" "this" {
   
   internal                   = local.lb.internal
   load_balancer_type         = local.lb.load_balancer_type
-  subnets         = local.lb.subnets
+  subnets         = var.subnet_ids
   security_groups = [aws_security_group.this.id]
 }
 
@@ -18,31 +18,6 @@ resource "aws_lb_listener" "this" {
     target_group_arn = aws_lb_target_group.this.arn
   }
 }
-
-resource "aws_lb_target_group" "this" {
-  name = "${local.namespace}-tg-${local.lb.name}"
-
-  vpc_id      = local.vpc_id
-  port        = local.lb.target_group.port
-  protocol    = local.lb.target_group.protocol
-  target_type = local.lb.target_group.target_type
-
-  health_check {
-    enabled             = local.lb.target_group.health_check.enabled
-    port                = local.lb.target_group.health_check.port
-    protocol            = local.lb.target_group.health_check.protocol
-    path                = local.lb.target_group.health_check.path
-    healthy_threshold   = local.lb.target_group.health_check.healthy_threshold
-    unhealthy_threshold = local.lb.target_group.health_check.unhealthy_threshold
-    timeout             = local.lb.target_group.health_check.timeout
-    interval            = local.lb.target_group.health_check.interval
-  }
-
-  tags = {
-    Name = "${local.namespace}-tg-${local.lb.name}"
-  }
-}
-
 
 resource "aws_security_group" "this" {
     name = "${local.namespace}-sg-lb-${local.lb.name}"

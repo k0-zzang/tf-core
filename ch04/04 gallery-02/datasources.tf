@@ -4,25 +4,9 @@ data "aws_vpc" "default" {
 
 data "aws_subnets" "default" {
   filter {
-    name   = "vpc-id"
+    name = "vpc-id"
     values = [data.aws_vpc.default.id]
   }
-}
-
-data "aws_iam_policy_document" "ec2_assume_role_policy" {
-  statement {
-    actions = ["sts:AssumeRole"]
-    effect  = "Allow"
-
-    principals {
-      type        = "Service"
-      identifiers = ["ec2.amazonaws.com"]
-    }
-  }
-}
-
-data "aws_iam_policy" "aws_ssm_core_policy" {
-  name = "AmazonSSMManagedInstanceCore"
 }
 
 data "aws_ami" "amazon_linux" {
@@ -34,4 +18,20 @@ data "aws_ami" "amazon_linux" {
   }
 
   owners = ["amazon"]
+}
+
+data "aws_iam_policy" "aws_ssm_core" {
+  name = "AmazonSSMManagedInstanceCore"
+}
+
+data "aws_iam_policy_document" "ec2_assume_role" {
+  statement {
+    actions = ["sts:AssumeRole"]
+    effect = "Allow"
+
+    principals {
+      type = "Service"
+      identifiers = ["ec2.amazonaws.com"]
+    }
+  }
 }

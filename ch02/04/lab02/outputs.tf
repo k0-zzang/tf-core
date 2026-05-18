@@ -22,6 +22,8 @@ output "iamprofile" {
 
 output "iamrole" {
     value = {
-        arn = aws_iam_role.this.arn
+        (local.iamrole.name) = {
+      arn = aws_iam_role.this.arn
     }
+  }
 }

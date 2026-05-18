@@ -1,8 +1,5 @@
 locals {
-  org     = "tf-core"
-  project = "gallery"
-
-  namespace = "${local.org}-${local.project}"
+  project = "tf-core-lab02"
 
   vpc_id = data.aws_vpc.default.id
 
@@ -16,12 +13,12 @@ locals {
 
     allow_access = {
       port        = var.service_port
-      cidr_blocks = ["0.0.0.0/0"]
+      cidr_blocks = var.cidr_blocks
     }
   }
 
   iamrole = {
-    name = "instance-web"
+    name = "instance"
 
     assume_role_policy = data.aws_iam_policy_document.ec2_assume_role.json
     policy_arn         = data.aws_iam_policy.aws_ssm_core.arn

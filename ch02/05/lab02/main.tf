@@ -1,18 +1,9 @@
 resource "aws_iam_role" "this" {
-  name               = "${local.namespace}-iamrole-${local.iamrole.name}"
+  name               = "${local.project}-iamrole-${local.iamrole.name}"
   assume_role_policy = local.iamrole.assume_role_policy
 
   tags = {
-    Name = "${local.namespace}-iamrole-${local.iamrole.name}"
-  }
-}
-
-resource "aws_iam_instance_profile" "this" {
-  name = "${local.namespace}-iamprofile-${local.iamrole.name}"
-  role = aws_iam_role.this.name
-
-  tags = {
-    Name = "${local.namespace}-iamprofile-${local.iamrole.name}"
+    Name = "${local.project}-iamrole-${local.iamrole.name}"
   }
 }
 
@@ -21,8 +12,17 @@ resource "aws_iam_role_policy_attachment" "this" {
   policy_arn = local.iamrole.policy_arn
 }
 
+resource "aws_iam_instance_profile" "this" {
+  name = "${local.project}-iamprofile-${local.iamrole.name}"
+  role = aws_iam_role.this.name
+
+  tags = {
+    Name = "${local.project}-iamprofile-${local.iamrole.name}"
+  }
+}
+
 resource "aws_security_group" "this" {
-  name   = "${local.namespace}-sg-instance-${local.instance.name}"
+  name   = "${local.project}-sg-${local.instance.name}"
   vpc_id = local.vpc_id
 
   ingress {
@@ -31,6 +31,7 @@ resource "aws_security_group" "this" {
     protocol    = "tcp"
     cidr_blocks = local.instance.allow_access.cidr_blocks
   }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -39,7 +40,7 @@ resource "aws_security_group" "this" {
   }
 
   tags = {
-    Name = "${local.namespace}-sg-instance-${local.instance.name}"
+    Name = "${local.project}-sg-${local.instance.name}"
   }
 }
 
@@ -55,6 +56,6 @@ resource "aws_instance" "this" {
   depends_on = [aws_iam_role_policy_attachment.this]
 
   tags = {
-    Name = "${local.namespace}-instance-${local.instance.name}"
+    Name = "${local.project}-instance-${local.instance.name}"
   }
 }
