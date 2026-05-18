@@ -6,7 +6,9 @@ locals {
 
     s3bucket = {
         name = "tfsate"
+
         bucket = "${local.org}-tfsate"
+        
         versioning_configuration = {
             status = "Enabled"
     }
@@ -17,5 +19,5 @@ locals {
       ignore_public_acls      = true
       restrict_public_buckets = true
     }
-}
+  }
 }

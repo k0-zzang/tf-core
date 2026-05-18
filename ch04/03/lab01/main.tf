@@ -7,6 +7,7 @@ resource "aws_s3_bucket" "this" {
 
   lifecycle {
     prevent_destroy = false
+# 실수로 리소스를 삭제되는것을 막아주는 장치라 지우려하면 false로 바꿔줘야함
   }
 }
 
