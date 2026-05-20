@@ -9,8 +9,8 @@ terraform {
   }
 
   backend "s3" {
-    bucket       = "tf-core-tfstate"
-    key          = "gallery/terraform.tfstate"
+    bucket       = "tf-core-tfstate-k0"
+    key          = "gallery/terraform.tfstate-k0"
     region       = "ap-northeast-2"
     encrypt      = true
     use_lockfile = true

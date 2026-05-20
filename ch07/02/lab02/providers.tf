@@ -10,10 +10,11 @@ terraform {
 
   backend "s3" {
     bucket       = "tf-core-tfstate-k0"
-    key          = "04.03/lab12/terraform.tfstate-k0"
+    key          = "07.02/lab02/terraform.tfstate-k0"
     region       = "ap-northeast-2"
     encrypt      = true
-    use_lockfile = true # false를 true로 변경하면 락거림
+    use_lockfile = true
+    workspace_key_prefix = "env:"
   }
 }
 
@@ -24,6 +25,7 @@ provider "aws" {
     tags = {
       Organization = local.org
       Project      = local.project
+      Environment  = local.environment
       ManagedBy    = "Terraform"
     }
   }

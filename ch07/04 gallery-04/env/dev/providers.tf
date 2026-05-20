@@ -10,10 +10,10 @@ terraform {
 
   backend "s3" {
     bucket       = "tf-core-tfstate-k0"
-    key          = "04.03/lab12/terraform.tfstate-k0"
+    key          = "env:/dev/gallery/terraform.tfstate-k0"
     region       = "ap-northeast-2"
     encrypt      = true
-    use_lockfile = true # false를 true로 변경하면 락거림
+    use_lockfile = true
   }
 }
 

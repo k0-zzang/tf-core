@@ -5,9 +5,10 @@ locals {
     namespace = "${local.org}-${local.project}"
 
     s3bucket = {
-        name = "tfsate"
+        name = "tfstate-k0"  
+      # 이름 중복되면 생성이 안되서 꼭 다르게 생성해줘야함 매번 권한문제로 init 안된이유임
 
-        bucket = "${local.org}-tfsate"
+        bucket = "${local.org}-tfstate-k0"
         
         versioning_configuration = {
             status = "Enabled"

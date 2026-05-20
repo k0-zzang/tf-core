@@ -5,7 +5,7 @@ module "network" {
 }
 
 module "platform" {
-  source = "./modules/platform"
+  source = "../../modules/platform"
 
   namespace = local.namespace
   vpc_id    = module.network.vpc["main"].id
@@ -15,15 +15,21 @@ module "platform" {
 }
 
 module "workload" {
-  source = "./modules/workload"
+  source = "../../modules/workload"
 
   namespace = local.namespace
   vpc_id    = module.network.vpc["main"].id
 
   asg_vpc_zone_identifier = [module.network.subnet["private-a"].id, module.network.subnet["private-b"].id]
   asg_target_group_arns   = [module.platform.lb["main"].target_group.arn]
+  infra_asg_deploy_version      = local.infra.asg.deploy_version
+  infra_asg_max_size            = local.infra.asg.max_size
+  infra_asg_min_size            = local.infra.asg.min_size
+  infra_asg_desired_capacity    = local.infra.asg.desired_capacity
+
 
   lt_iam_instance_profile_name = module.platform.iamprofile["instance"].name
   lt_allow_access_cidr_blocks  = [module.network.subnet["public-a"].cidr_block, module.network.subnet["public-b"].cidr_block]
-  lt_service_port = local.infra.lt.service_port
+  lt_service_port              = local.infra.lt.service_port
+  infra_lt_instance_type       = local.infra.lt.instance_type
 }
